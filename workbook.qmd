@@ -1,0 +1,51 @@
+
+```{python}
+import pandas as pd
+import os
+path = os.path.join(os.getcwd(),'logins.txt')
+header = ['Date','Time','ID','log']
+df = pd.read_csv(path,sep="\t")
+
+print(df.head())
+print(df.shape)
+```
+
+```{python}
+# Create header for dataframe
+df.loc[-1] = df.columns
+df.index = df.index + 1
+df = df.sort_index()
+df.columns = ['Date','Time','ID','log']
+
+print(df.shape)
+```
+
+# Clean The Data
+```{python}
+def dtest(df):
+  print('-'*10)
+  print(df.dtypes)
+  print('\n'*2)
+  print(df.describe())
+  print('\n'*2)
+  print(df.isna().sum())
+  print('\n')
+  print('-'*10)
+
+dtest(df)
+```
+
+# Change Datatypes
+```{python}
+import matplotlib.pyplot as plt
+
+plt.figure()
+```
+
+```{python}
+# df.head()
+
+tf = df.groupby('Time').count()
+t_counts = tf['Date']
+
+```
